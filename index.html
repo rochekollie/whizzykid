@@ -4,10 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhizzyKid</title>
+    <title>MathWhiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Coming Soon</h1>
-    <script src="script.js"></script>
+<div id="interface">
+    <header>
+        <h1>MathWhiz</h1>
+    </header>
+    <main>
+        <h2>Find the <span id="equation-phrase"></span> of the two numbers?</h2>
+        <div id="equation">
+            <span class="nums nums-and-operators" id="num1"></span>
+            <span class="signs nums-and-operators" id="operator"></span>
+            <span class="nums nums-and-operators" id="num2"></span>
+            <span class="signs nums-and-operators" id="equals">=</span>
+            <span class="signs nums-and-operators" id="answer">?</span>
+        </div>
+        <div id="multiple-choice">
+            <button type="button" class="choices" id="choice-1"></button>
+            <button type="button" class="choices" id="choice-2"></button>
+            <button type="button" class="choices" id="choice-3"></button>
+            <button type="button" class="choices" id="choice-4"></button>
+        </div>
+    </main>
+    <footer>
+        <div class="action">
+            <button class="actions" id="retry">Retry</button>
+            <button class="actions" id="check">Check</button>
+            <button class="actions" id="next">Next</button>
+        </div>
+    </footer>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
