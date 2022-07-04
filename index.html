@@ -13,30 +13,31 @@
 <body>
 <div id="interface">
     <header>
-        <h1>WhizzyKid</h1>
+        <h1 id="app-name">WhizzyKid</h1>
     </header>
     <main>
-        <h2>Find the <span id="equation-phrase"></span> of the two numbers?</h2>
+        <h2>Find the <span id="equation-phrase"></span> of the two numbers:</h2>
         <div id="equation">
-            <span class="nums nums-and-operators" id="num1"></span>
-            <span class="signs nums-and-operators" id="operator"></span>
-            <span class="nums nums-and-operators" id="num2"></span>
-            <span class="signs nums-and-operators" id="equals">=</span>
-            <span class="signs nums-and-operators" id="answer">?</span>
+            <span class="numbers operands-and-operators" id="first-operand-element"></span>
+            <span class="operators operands-and-operators" id="operator-element"></span>
+            <span class="numbers operands-and-operators" id="second-operand-element"></span>
+            <span class="operators operands-and-operators" id="equal-sign-element">=</span>
+            <span class="operators operands-and-operators" id="equation-result">?</span>
         </div>
-        <div id="multiple-choice">
-            <button type="button" class="choices" id="choice-1"></button>
-            <button type="button" class="choices" id="choice-2"></button>
-            <button type="button" class="choices" id="choice-3"></button>
-            <button type="button" class="choices" id="choice-4"></button>
+        <div id="answer-choices-container">
+            <button type="button" class="answer-choices" id="answer-choice-1-button"></button>
+            <button type="button" class="answer-choices" id="answer-choice-2-button"></button>
+            <button type="button" class="answer-choices" id="answer-choice-3-button"></button>
+            <button type="button" class="answer-choices" id="answer-choice-4-button"></button>
+        </div>
+        <div class="action-buttons-container">
+            <button class="action-buttons" id="retry-button">Retry</button>
+            <button class="action-buttons" id="check-button">Check</button>
+            <button class="action-buttons" id="next-button">Next</button>
         </div>
     </main>
     <footer>
-        <div class="action">
-            <button class="actions" id="retry">Retry</button>
-            <button class="actions" id="check">Check</button>
-            <button class="actions" id="next">Next</button>
-        </div>
+        <p>&copy; <span id="copyright-year"></span> WhizzyKid | Made with <span id="heart">&hearts;</span>  by <a href="#">Roche Kollie</a></p>
     </footer>
 </div>
 <script src="script.js"></script>
