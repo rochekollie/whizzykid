@@ -137,15 +137,6 @@
     const equationResultElement = document.getElementById("equation-result");
     const answerChoiceElements = document.getElementsByClassName("answer-choices");
 
-    // // Assign the equation's result to a variable
-    // const arithmeticResult = arithmeticEquationObject.result;
-    //
-    // // Get the multiple choices for the equation
-    // const multipleChoices = getMultipleChoices(arithmeticResult);
-    //
-    // // Assign the equation values to an array
-    // const equationOperandsAndOperators = arithmeticEquation.equation.split(" ");
-
     /**
      * Displays given values of within the equationPhraseElement, firstOperandElement, operatorElement, secondOperandElement, equalSignElement, equationResultElement, and answerChoiceElements
      * @param {string} equationPhrase - The string to display within the equationPhraseElement
@@ -271,7 +262,7 @@
     });
 
 
-// Style the answer element when the check button is clicked
+    // Style the answer element when the check button is clicked
     const answerElement = document.getElementById("equation-result");
     const styleAnswer = (flag) => {
         if (flag) {
@@ -283,7 +274,7 @@
         }
     }
 
-// reset the answer element when the reset button or next button is clicked
+    // reset the answer element when the reset button or next button is clicked
     const resetAnswerStyle = () => {
         answerElement.style.backgroundColor = "#2f2f2f";
         answerElement.style.color = "#ffffff99";
