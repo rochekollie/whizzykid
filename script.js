@@ -108,24 +108,55 @@
      * */
     const getMultipleChoices = (equationResult) => {
         const multipleChoices = [];
+        multipleChoices.push(equationResult);
         for (let i = 0; i < 3; i++) {
             let choice = getRandomOperand(operandMinValue, operandMaxValue);
-            while (multipleChoices.includes(choice) && choice !== equationResult) {
-                choice = getRandomOperand(operandMinValue, operandMaxValue);
+            // check if the choice is already in the array
+            if (multipleChoices.includes(choice))
+            {
+                i--; // if it is, try again
+            } else
+            {
+                multipleChoices.push(choice); // if not, add it to the array
             }
-            multipleChoices.push(choice);
         }
 
-        multipleChoices.push(equationResult);
-
-        //shuffle the multiple choices with the answer
-        for (let i = 0; i < multipleChoices.length; i++) {
-            const randomIndex = Math.floor(Math.random() * multipleChoices.length);
-            const temp = multipleChoices[i];
-            multipleChoices[i] = multipleChoices[randomIndex];
-            multipleChoices[randomIndex] = temp;
-        }
         return multipleChoices;
+    }
+
+    /**
+     * Shuffles a give array and return a new array
+     * @param {array} array - The array to be shuffled
+     * @returns {array} - A new array containing the shuffled elements of the given array
+     * @example shuffleArray([1, 2, 3, 4, 5]) // returns an array of five elements containing the shuffled elements of the given array
+     * */
+    const shuffleArray = (array) => {
+
+        // Version 1 of the shuffle algorithm
+        let currentIndex = array.length, temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        // Version 2 of the shuffle algorithm
+        // for (let i = 0; i < array.length; i++) {
+        //     const randomIndex = Math.floor(Math.random() * array.length);
+        //     const temp = array[i];
+        //     array[i] = array[randomIndex];
+        //     array[randomIndex] = temp;
+        // }
+
+        return array;
     }
 
     // Assign operands, operators, result, and multiple choices elements to variables
@@ -208,7 +239,8 @@
         const newFirstOperand = newEquationOperandsAndOperators[0];
         const newOperator = newEquationOperandsAndOperators[1];
         const newSecondOperand = newEquationOperandsAndOperators[2];
-        const newMultipleChoices = getMultipleChoices(newArithmeticResult);
+        const newMultipleChoices = shuffleArray(getMultipleChoices(newArithmeticResult));
+
         document.getElementById("equation-result").innerHTML = "?";
 
         displayEquation(newEquationPhrase, newFirstOperand, newOperator, newSecondOperand, newMultipleChoices);
@@ -292,7 +324,8 @@
         const firstOperand = operandsAndOperators[0];
         const operator = operandsAndOperators[1];
         const secondOperand = operandsAndOperators[2];
-        const multipleChoices = getMultipleChoices(equationResult);
+        const multipleChoices = shuffleArray(getMultipleChoices(equationResult));
+
 
 
         displayEquation(arithmeticPhrase, firstOperand, operator, secondOperand, multipleChoices);
