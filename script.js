@@ -99,13 +99,12 @@
 
     /**
      * Takes a number
-     * and generates three random numbers that are not the same as the given number
-     * and returns a shuffle array of four elements containing the three generated numbers and the given number.
+     * and generates three random numbers that are unique (different) from each other as well as the given number
+     * and returns a shuffle array of four elements containing the three generated unique numbers and the given number.
      * @param equationResult - The given number
      * @returns {array} -
      * A shuffle array of four elements containing the three generated numbers and the given number
-     * @example getMultipleChoices(10)
-     * // returns an array of four elements containing the three generated numbers and the given number
+     * @example getMultipleChoices(10) // returns an array of four elements containing the three generated numbers and the given number
      * */
     const getMultipleChoices = (equationResult) => {
         const multipleChoices = [];
@@ -281,7 +280,7 @@
         answerElement.style.border = "none";
     }
 
-// Populate the page with the generated equation on window.onload
+    // Populate the page with the generated equation on window.onload
     window.onload = () => {
         // Get a random arithmetic equation
         const arithmeticEquationObject = getRandomArithmeticEquation(arithmeticOperations);
