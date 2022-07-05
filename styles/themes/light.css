@@ -1,0 +1,78 @@
+@media (prefers-color-scheme: light) {
+	body {
+		background-color: #FFF;
+		color: var(--dark-text-color);
+	}
+
+	header {
+		background-color: rgba(0, 0, 0, 0.8);
+		color: #27282C;
+	}
+
+	a {
+		color: rgb(0, 70, 255);
+	}
+
+	#signature {
+		color: #27282CB3;
+		/* text-shadow: 4px 4px 4px #aaa; */
+		font-weight: 500;
+	}
+
+	#about {
+		border: solid thin rgb(225, 225, 225);
+		background-color: #EFF5F9;
+		box-shadow: 0px 6px 12px 3px rgba(0, 0, 0, 0.24);
+	}
+
+	#contact {
+		border: solid thin rgb(225, 225, 225);
+		background-color: #F5F5F5;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p {
+		color: #212223CC;
+		/* color: black; */
+	}
+
+	footer {
+		background-color: rgb(200, 200, 200);
+	}
+
+	form input,
+	form select,
+	form textarea {
+		background-color: rgb(225, 225, 225);
+	}
+
+	form input {
+		border-bottom: solid thin rgb(200, 200, 200);
+	}
+
+	#message-header,
+	#message-body {
+		border: solid thin rgb(200, 200, 200);
+	}
+
+	#message-header {
+		border-radius: 12px 12px 1px 1px;
+		border-bottom: none;
+	}
+
+	#message-body {
+		border-radius: 1px 1px 12px 12px;
+		border-top: none;
+	}
+
+	form input:focus,
+	form select option:focus,
+	form textarea:focus {
+		background-color: rgb(255, 255, 255);
+	}
+}

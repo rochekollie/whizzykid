@@ -1,0 +1,79 @@
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #1C1C1C;
+		color: #F5F5F7;
+	}
+
+	header {
+		background-color: rgba(40, 40, 40, 0.8);
+		color: #27282C;
+	}
+
+	a {
+		color: rgb(0, 140, 255);
+	}
+
+	#signature {
+		text-shadow: 4px 4px 4px rgb(17, 17, 17);
+	}
+
+	#about {
+		border: solid thin #C8C8C855;
+		background-color: #232425;
+	}
+
+	#contact {
+		border: solid thin #52515155;
+		background-color: #27282C;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p {
+		color: rgb(255, 255, 255);
+
+
+	}
+
+	footer {
+		color: #c8c8c8;
+		background-color: #191919;
+	}
+
+	#message-header,
+	#message-body {
+		border: solid thin rgb(71, 71, 71);
+		background-color: transparent;
+	}
+
+	#message-header {
+		border-radius: 12px 12px 1px 1px;
+		border-bottom: none;
+	}
+
+	#message-body {
+		border-radius: 1px 1px 12px 12px;
+		border-top: none;
+	}
+
+	form input,
+	form select,
+	form textarea {
+		background-color: transparent;
+		color: #c8c8c8;
+	}
+
+	form input {
+		/* border-bottom: solid thin rgb(100, 100, 100); */
+	}
+
+	form input:focus,
+	form select option:focus,
+	form textarea:focus {
+		background-color: rgb(27, 27, 27);
+	}
+}

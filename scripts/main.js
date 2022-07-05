@@ -1,13 +1,32 @@
 /* jshint esversion: 8 */
+import { load, generateStaticPage } from './loader.mjs';
 (function () {
     "use strict";
 
-    const currentYearElement = document.getElementById("copyright-year");
+    //load the nav into the header
+    load('/assets/header.html', document.querySelector('header'));
 
-    // Set current year
-    const launchYear = '2022';
-    const currentYear = new Date().getFullYear();
-    currentYearElement.innerHTML = `${launchYear} - ${currentYear}`;
+    //load the footer into the footer
+    load('/assets/footer.html', document.querySelector('footer'));
+
+    const displayCopyrightYear = () => {
+        const currentYearElement = document.getElementById("copyright-year");
+
+        // Set current year
+        const launchYear = '2022';
+        const currentYear = new Date().getFullYear();
+
+        console.log("Lunch year type is " + typeof launchYear);
+        console.log("Lunch year type is " + typeof currentYear);
+
+        if (parseInt(launchYear) === currentYear)
+        {
+            currentYearElement.innerHTML = `${ currentYear }`;
+        } else
+        {
+            currentYearElement.innerHTML = `${ launchYear } - ${ currentYear }`;
+        }
+    };
 
     // Set each equation operand minimum and maximum values
     const operandMinValue = 0; // The minimum value for an operand
@@ -85,17 +104,21 @@
      * */
     const generateArithmeticEquationPhrase = (arithmeticOperation) => {
         let arithmeticEquationPhrase = "";
-        if (arithmeticOperation === "+") {
+        if (arithmeticOperation === "+")
+        {
             arithmeticEquationPhrase = 'sum';
-        } else if (arithmeticOperation === "-") {
+        } else if (arithmeticOperation === "-")
+        {
             arithmeticEquationPhrase = 'difference';
-        } else if (arithmeticOperation === "*") {
+        } else if (arithmeticOperation === "*")
+        {
             arithmeticEquationPhrase = 'product';
-        } else if (arithmeticOperation === "/") {
+        } else if (arithmeticOperation === "/")
+        {
             arithmeticEquationPhrase = 'quotient';
         }
         return arithmeticEquationPhrase;
-    }
+    };
 
     /**
      * Takes a number
@@ -109,7 +132,8 @@
     const getMultipleChoices = (equationResult) => {
         const multipleChoices = [];
         multipleChoices.push(equationResult);
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++)
+        {
             let choice = getRandomOperand(operandMinValue, operandMaxValue);
             // check if the choice is already in the array
             if (multipleChoices.includes(choice))
@@ -122,7 +146,7 @@
         }
 
         return multipleChoices;
-    }
+    };
 
     /**
      * Shuffles a give array and return a new array
@@ -136,16 +160,17 @@
         let currentIndex = array.length, temporaryValue, randomIndex;
 
         // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
+        while (0 !== currentIndex)
+        {
 
             // Pick a remaining element...
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
 
             // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
+            temporaryValue = array[ currentIndex ];
+            array[ currentIndex ] = array[ randomIndex ];
+            array[ randomIndex ] = temporaryValue;
         }
 
         // Version 2 of the shuffle algorithm
@@ -157,7 +182,7 @@
         // }
 
         return array;
-    }
+    };
 
     // Assign operands, operators, result, and multiple choices elements to variables
     const equationPhraseElement = document.getElementById("equation-phrase");
@@ -187,11 +212,11 @@
         firstOperandElement.innerHTML = firstOperandValue.toString();
         operatorElement.innerHTML = operatorValue;
         secondOperandElement.innerHTML = secondOperandValue.toString();
-        answerChoiceElements[0].innerHTML = answerChoicesArray[0];
-        answerChoiceElements[1].innerHTML = answerChoicesArray[1];
-        answerChoiceElements[2].innerHTML = answerChoicesArray[2];
-        answerChoiceElements[3].innerHTML = answerChoicesArray[3];
-    }
+        answerChoiceElements[ 0 ].innerHTML = answerChoicesArray[ 0 ];
+        answerChoiceElements[ 1 ].innerHTML = answerChoicesArray[ 1 ];
+        answerChoiceElements[ 2 ].innerHTML = answerChoicesArray[ 2 ];
+        answerChoiceElements[ 3 ].innerHTML = answerChoicesArray[ 3 ];
+    };
 
     /**
      * Receives an event and fill
@@ -201,7 +226,7 @@
      * */
     const swapAndFillEquationResult = (event) => {
         equationResultElement.innerHTML = event.target.innerHTML;
-    }
+    };
 
     /**
      * Receives an array of css properties values and styles the equationResultElement when the element is filled
@@ -212,10 +237,11 @@
         equationResultElement.style.backgroundColor = '#292929';
         equationResultElement.style.color = '#ffffff';
         equationResultElement.style.border = 'none';
-    }
+    };
 
-    for (let i = 0; i < answerChoiceElements.length; i++) {
-        answerChoiceElements[i].addEventListener("click", (event) => {
+    for (const answerChoiceElement of answerChoiceElements)
+    {
+        answerChoiceElement.addEventListener("click", (event) => {
             swapAndFillEquationResult(event);
             styleEquationResult();
         });
@@ -225,7 +251,7 @@
     // the correct answer, and answer choices to the local storage
     const saveEquationData = (equationDataObject) => {
         localStorage.setItem("equationData", JSON.stringify(equationDataObject));
-    }
+    };
 
     // Generate a new equation with answers choices and display it on the page when the next button is clicked
     const nextButton = document.getElementById("next-button");
@@ -254,7 +280,7 @@
             "secondOperand": newSecondOperand,
             "equationResult": newArithmeticResult,
             "multipleChoices": newMultipleChoices
-        }
+        };
         saveEquationData(newEquationData);
         resetAnswerStyle();
     });
@@ -296,24 +322,32 @@
     // Style the answer element when the check button is clicked
     const answerElement = document.getElementById("equation-result");
     const styleAnswer = (flag) => {
-        if (flag) {
+        if (flag)
+        {
             answerElement.style.backgroundColor = "lightgreen";
             answerElement.style.color = "darkgreen";
-        } else {
+        } else
+        {
             answerElement.style.backgroundColor = "lightpink";
             answerElement.style.color = "darkred";
         }
-    }
+    };
 
     // reset the answer element when the reset button or next button is clicked
     const resetAnswerStyle = () => {
         answerElement.style.backgroundColor = "#2f2f2f";
         answerElement.style.color = "#ffffff99";
         answerElement.style.border = "none";
-    }
+    };
 
     // Populate the page with the generated equation on window.onload
     window.onload = () => {
+
+        generateStaticPage();
+
+        // display the copyright information
+        displayCopyrightYear();
+
         // Get a random arithmetic equation
         const arithmeticEquationObject = getRandomArithmeticEquation(arithmeticOperations);
         const arithmeticEquation = arithmeticEquationObject.equation;
@@ -321,12 +355,10 @@
         const arithmeticPhrase = generateArithmeticEquationPhrase(arithmeticOperator);
         const equationResult = arithmeticEquationObject.result;
         const operandsAndOperators = arithmeticEquation.split(" ");
-        const firstOperand = operandsAndOperators[0];
-        const operator = operandsAndOperators[1];
-        const secondOperand = operandsAndOperators[2];
+        const firstOperand = operandsAndOperators[ 0 ];
+        const operator = operandsAndOperators[ 1 ];
+        const secondOperand = operandsAndOperators[ 2 ];
         const multipleChoices = shuffleArray(getMultipleChoices(equationResult));
-
-
 
         displayEquation(arithmeticPhrase, firstOperand, operator, secondOperand, multipleChoices);
 
@@ -337,7 +369,7 @@
             "secondOperand": secondOperand,
             "equationResult": equationResult,
             "multipleChoices": multipleChoices
-        }
+        };
         saveEquationData(equationData);
-    }
+    };
 }());

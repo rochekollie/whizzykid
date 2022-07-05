@@ -1,3 +1,43 @@
+:root {
+
+    /* text */
+    --primaryTextColor: #080808;
+    --secondaryTextColor: #000000;
+    --linkColor: rgb(135, 206, 250);
+    --linkInteractionColor: rgb(173, 216, 230);
+
+    /* backgrounds */
+    --whiteBg: rgb(255, 255, 255);
+    --darkBg: rgb(0, 0, 0);
+    --transparent: rgba(0, 0, 0, .5);
+    --translucent: rgba(0, 0, 0, .5);
+
+    /* buttons */
+    --defaultBtnBg: #000000;
+    --defaultBtnColor: #000000;
+    --primaryBtnBg: #000000;
+    --primaryBtnColor: #ffffff;
+    --secondaryBtnBg: #000000;
+    --secondaryBtnColor: #000000;
+    --dangerBtnBg: #000000;
+    --dangerBtnColor: #000000;
+    --warningBtnBg: #000000;
+    --warningBtnColor: #000000;
+    --successBtnBg: #000000;
+    --successBtnColor: #000000;
+    --specialBtnBg: #000000;
+    --specialBtnColor: #000000;
+
+    /* borders */
+    --smallBorder: solid 0.01rem #000000;
+    --normalBorder: solid 1px #000000;
+    --largeBorder: solid 2px #000000;
+    --thickBorder: solid 3px #000000;
+    --squaredRadius: 1px;
+    --curvedRadius: 1px;
+    --roundedRadius: 50%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -29,11 +69,29 @@ header {
     height: 80px;
     margin: 0;
     padding: 1rem;
-    align-items: center;
     background: #2f2f2f;
     display: flex;
     justify-content: center;
+    align-items: center;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+nav {
+    margin-left: auto;
+}
+
+header nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 1rem;
 }
 
 #app-name {
@@ -80,13 +138,13 @@ h2 {
 a,
 a:visited {
     text-decoration: none;
-    color: lightskyblue;
+    color: rgb(135, 206, 250);
 }
 
 a:hover,
 a:focus,
 a:active {
-    color: lightblue;
+    color: rgb(173, 216, 230);
 }
 
 .operands-and-operators {
@@ -99,7 +157,8 @@ a:active {
     color: #ffffff;
 }
 
-.numbers, #equation-result {
+.numbers,
+#equation-result {
     margin: 0;
     padding: 0;
     width: calc(100px - 2rem);
@@ -184,13 +243,15 @@ a:active {
     color: lightblue;
 }
 
-#retry-button, #next-button {
+#retry-button,
+#next-button {
     border-style: none;
     background-color: #292929;
     text-decoration: underline;
 }
 
-#next-button:hover, #retry-button:hover {
+#next-button:hover,
+#retry-button:hover {
     text-decoration: underline;
 }
 
