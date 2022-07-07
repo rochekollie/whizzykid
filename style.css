@@ -297,11 +297,13 @@ a:active {
 .correct-answer {
     color: darkgreen;
     background-color: lightgreen;
+    border-radius: 5px;
 }
 
 .incorrect-answer {
     color: darkred;
     background-color: lightpink;
+    border-radius: 5px;
 }
 
 .positive-comment {
