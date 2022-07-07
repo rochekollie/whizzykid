@@ -1,17 +1,25 @@
-/* jshint esversion: 8 */
+import {correctComments, incorrectComments}  from "./comments.js";
+
 (function () {
     "use strict";
 
-    const currentYearElement = document.getElementById("copyright-year");
+    function displayCopyrightYear() {
+        const currentYearElement = document.getElementById("copyright-year");
+        const launchYear = "2022";
+        const currentYear = new Date().getFullYear();
 
-    // Set current year
-    const launchYear = '2022';
-    const currentYear = new Date().getFullYear();
-    currentYearElement.innerHTML = `${launchYear} - ${currentYear}`;
+        if (parseInt(launchYear) === currentYear)
+        {
+            currentYearElement.innerHTML = `${ currentYear }`;
+        } else
+        {
+            currentYearElement.innerHTML = `${ launchYear } - ${ currentYear }`;
+        }
+    }
 
     // Set each equation operand minimum and maximum values
     const operandMinValue = 0; // The minimum value for an operand
-    const operandMaxValue = 25; // The maximum value of an operand in the equation
+    const operandMaxValue = 10; // The maximum value of an operand
 
     /**
      * Gets a random number between a given minimum and maximum values
@@ -27,26 +35,33 @@
     // Set the type of arithmetic operations an equation may contain
     const addition = '+';
     const subtraction = '-';
-    const arithmeticOperations = [addition, subtraction];
+    const multiplication = '*';
+    const division = '/';
+    const arithmeticOperations = [
+        addition,
+        subtraction,
+        multiplication,
+        division
+    ];
 
     /**
      * Gets a random arithmetic operator from a given array of arithmetic operators
-     * @param {array} arithmeticOperations - The array of arithmetic operators
+     * @param {array} array - The array of arithmetic operators
      * @returns {string} - The random arithmetic operator
      * @example getRandomArithmeticOperator(['+', '-', '*', '/']) // returns a random arithmetic operator
      * */
-    function getRandomArithmeticOperator(arithmeticOperations) {
-        return arithmeticOperations[Math.floor(Math.random() * arithmeticOperations.length)];
+    function getRandomArithmeticOperator(array) {
+        return array[ Math.floor(Math.random() * array.length) ];
     }
 
     /**
      * Gets a random arithmetic equation from a given array of arithmetic operations
-     * @param {array} arithmeticOperations - The array of arithmetic operations
+     * @param {array} array - The array of arithmetic operations
      * @returns {object} - A random object containing an equation and a result properties and values
      * @example getRandomArithmeticEquation(['+', '-', '*', '/']) // returns a random arithmetic equation
      * */
-    function getRandomArithmeticEquation(arithmeticOperations) {
-        const operator = getRandomArithmeticOperator(arithmeticOperations);
+    function getRandomArithmeticEquation(array) {
+        const operator = getRandomArithmeticOperator(array);
         let operand1 = getRandomOperand(operandMinValue, operandMaxValue);
         let operand2 = getRandomOperand(operandMinValue, operandMaxValue);
         let number = 0;
@@ -62,9 +77,7 @@
             operand1 = number;
         }
 
-        // Ensure when operator === '/'
-        // that the second operand is not 0 and that the first operand is not 0,
-        // and that the remainder is not 0
+        // Ensure when operator === '/' operands !== 0
         if (operator === "/") {
             while (operand2 === 0 || operand1 === 0 || operand1 % operand2 !== 0) {
                 operand1 = getRandomOperand(operandMinValue, operandMaxValue);
@@ -73,28 +86,60 @@
         }
 
         const equation = `${operand1} ${operator} ${operand2}`;
-        const result = eval(equation);
-        return {equation, operator, result};
+
+        switch (operator)
+        {
+            case addition: {
+                number = operand1 + operand2;
+                break;
+            }
+            case subtraction: {
+                number = operand1 - operand2;
+                break;
+            }
+            case "*": {
+                number = operand1 * operand2;
+                break;
+            }
+            case "/": {
+                number = operand1 / operand2;
+                break;
+            }
+        }
+
+        return {
+            equation: equation,
+            operator: operator,
+            result: number
+        };
+
+        //option 2
+        // const result = eval(equation);
+        // return {equation, operator, result};
     }
+
+    //}
 
     /**
      * Generates mathematical equation phrases based on a given arithmetic operation
-     * @param {string} arithmeticOperation - The arithmetic operation
      * @returns {string} - An string containing a mathematical equation phrase
-     * @example generateArithmeticEquationPhrases('+') // returns a string containing a mathematical equation phrase
+     * @param operator - The arithmetic operation to use when generating the equation phrases
+     * @example getArithmeticWord('+') // returns a string containing a mathematical equation phrase
      * */
-    const generateArithmeticEquationPhrase = (arithmeticOperation) => {
-        let arithmeticEquationPhrase = "";
-        if (arithmeticOperation === "+") {
-            arithmeticEquationPhrase = 'sum';
-        } else if (arithmeticOperation === "-") {
-            arithmeticEquationPhrase = 'difference';
-        } else if (arithmeticOperation === "*") {
-            arithmeticEquationPhrase = 'product';
-        } else if (arithmeticOperation === "/") {
-            arithmeticEquationPhrase = 'quotient';
+    function getArithmeticWord(operator) {
+        if (operator === "+")
+        {
+            return "sum";
+        } else if (operator === "-")
+        {
+            return 'difference';
+        } else if (operator === "*")
+        {
+            return 'product';
+        } else if (operator === "/")
+        {
+            return 'quotient';
         }
-        return arithmeticEquationPhrase;
     }
 
     /**
@@ -102,8 +147,8 @@
      * and generates three random numbers that are unique (different) from each other as well as the given number
      * and returns a shuffle array of four elements containing the three generated unique numbers and the given number.
      * @param equationResult - The given number
-     * @returns {array} -
-     * A shuffle array of four elements containing the three generated numbers and the given number
+     * @returns {array} - array of four elements containing the three
+     * generated numbers and the given number
      * @example getMultipleChoices(10) // returns an array of four elements containing the three generated numbers and the given number
      * */
     const getMultipleChoices = (equationResult) => {
@@ -120,9 +165,8 @@
                 multipleChoices.push(choice); // if not, add it to the array
             }
         }
-
         return multipleChoices;
-    }
+    };
 
     /**
      * Shuffles a give array and return a new array
@@ -157,7 +201,7 @@
         // }
 
         return array;
-    }
+    };
 
     // Assign operands, operators, result, and multiple choices elements to variables
     const equationPhraseElement = document.getElementById("equation-phrase");
@@ -168,30 +212,69 @@
     const answerChoiceElements = document.getElementsByClassName("answer-choices");
 
     /**
-     * Displays given values of within the equationPhraseElement, firstOperandElement, operatorElement, secondOperandElement, equalSignElement, equationResultElement, and answerChoiceElements
-     * @param {string} equationPhrase - The string to display within the equationPhraseElement
-     * @param {string} firstOperandValue - The number to display within the firstOperandElement
-     * @param {string} operatorValue - The string to display within the operatorElement
-     * @param {string} secondOperandValue - The number to display within the secondOperandElement
-     * @param {Array} answerChoicesArray - An array of numbers to display within the answerChoiceElements
-     * @example displayEquation('sum', 10, '+', 20, '=', 30, [10, 20, 30, 40])
-     *
+     * Displays an object property values as an equation string on the page
      * */
-    const displayEquation = (
-        equationPhrase,
-        firstOperandValue,
-        operatorValue,
-        secondOperandValue,
-        answerChoicesArray) => {
-        equationPhraseElement.innerHTML = equationPhrase;
-        firstOperandElement.innerHTML = firstOperandValue.toString();
-        operatorElement.innerHTML = operatorValue;
-        secondOperandElement.innerHTML = secondOperandValue.toString();
-        answerChoiceElements[0].innerHTML = answerChoicesArray[0];
-        answerChoiceElements[1].innerHTML = answerChoicesArray[1];
-        answerChoiceElements[2].innerHTML = answerChoicesArray[2];
-        answerChoiceElements[3].innerHTML = answerChoicesArray[3];
+    function displayEquation () {
+        const equationData = JSON.parse(localStorage.getItem("equationData"));
+        equationPhraseElement.innerHTML = equationData.phrase;
+        firstOperandElement.innerHTML = equationData.firstOperand;
+        operatorElement.innerHTML = equationData.mathOperator;
+        secondOperandElement.innerHTML = equationData.secondOperand;
+        answerChoiceElements[0].innerHTML = equationData.multipleChoices[0];
+        answerChoiceElements[1].innerHTML = equationData.multipleChoices[1];
+        answerChoiceElements[2].innerHTML = equationData.multipleChoices[2];
+        answerChoiceElements[3].innerHTML = equationData.multipleChoices[3];
     }
+
+    function saveEquation (object) {
+        const equation = object.equation.split(" ");
+        const multipleChoices = shuffleArray(getMultipleChoices(object.result));
+        const equationData = {
+            phrase: getArithmeticWord(equation[1]),
+            firstOperand: equation[0],
+            mathOperator: equation[1],
+            secondOperand: equation[2],
+            result: object.result,
+            multipleChoices: multipleChoices,
+            isCorrect: false
+        };
+        localStorage.setItem("equationData", JSON.stringify(equationData));
+    }
+
+    function getRecentEquation () {
+        return JSON.parse(localStorage.getItem("equationData"));
+    }
+
+    const savePreviousEquations = (equationData) => {
+        const previousEquations = localStorage.getItem("previousEquations");
+        if (previousEquations)
+        {
+            previousEquations.push(equationData);
+            localStorage.setItem("previousEquations", JSON.stringify(previousEquations));
+        } else {
+            const previousEquations = [];
+            previousEquations.push(equationData);
+            localStorage.setItem("previousEquations", JSON.stringify(previousEquations));
+        }
+    }
+
+    const getPreviousEquations = () => JSON.parse(localStorage.getItem("previousEquations"));
+
+    const getPreviousEquationCount = () => {
+        const previousEquations = localStorage.getItem("previousEquations");
+        if (previousEquations) {
+            console.log(previousEquations);
+            return JSON.parse(previousEquations).length;
+        } else {
+            const previousEquations = [];
+            localStorage.setItem("previousEquations", JSON.stringify(previousEquations));
+            console.log(previousEquations);
+            return localStorage.getItem("previousEquations").length;
+        }
+
+    }
+
+    const resetPreviousEquations = () => localStorage.removeItem("previousEquations");
 
     /**
      * Receives an event and fill
@@ -201,7 +284,7 @@
      * */
     const swapAndFillEquationResult = (event) => {
         equationResultElement.innerHTML = event.target.innerHTML;
-    }
+    };
 
     /**
      * Receives an array of css properties values and styles the equationResultElement when the element is filled
@@ -209,10 +292,11 @@
      * @example styleEquationResult(["background-color", "white", "border", "none"])
      */
     const styleEquationResult = () => {
-        equationResultElement.style.backgroundColor = '#292929';
-        equationResultElement.style.color = '#ffffff';
-        equationResultElement.style.border = 'none';
-    }
+        answerElement.classList.remove("correct-answer");
+        answerElement.classList.remove("incorrect-answer");
+        answerElement.classList.remove("operators");
+        answerElement.classList.add("numbers");
+    };
 
     for (let i = 0; i < answerChoiceElements.length; i++) {
         answerChoiceElements[i].addEventListener("click", (event) => {
@@ -221,123 +305,179 @@
         });
     }
 
-    // Save the loaded equation, correct, equation phrase,
-    // the correct answer, and answer choices to the local storage
-    const saveEquationData = (equationDataObject) => {
-        localStorage.setItem("equationData", JSON.stringify(equationDataObject));
-    }
-
-    // Generate a new equation with answers choices and display it on the page when the next button is clicked
-    const nextButton = document.getElementById("next-button");
-    nextButton.addEventListener("click", () => {
-        const newEquationObject = getRandomArithmeticEquation(arithmeticOperations);
-        const newEquation = newEquationObject.equation;
-        const newArithmeticOperator = newEquationObject.operator;
-        const newEquationPhrase = generateArithmeticEquationPhrase(newArithmeticOperator);
-        const newArithmeticResult = newEquationObject.result;
-        const newEquationOperandsAndOperators = newEquation.split(" ");
-        const newFirstOperand = newEquationOperandsAndOperators[0];
-        const newOperator = newEquationOperandsAndOperators[1];
-        const newSecondOperand = newEquationOperandsAndOperators[2];
-        const newMultipleChoices = shuffleArray(getMultipleChoices(newArithmeticResult));
-
-        document.getElementById("equation-result").innerHTML = "?";
-
-        displayEquation(newEquationPhrase, newFirstOperand, newOperator, newSecondOperand, newMultipleChoices);
-
-        // Reset the equationData in local storage
-        localStorage.removeItem("equationData");
-        const newEquationData = {
-            "equationPhrase": newEquationPhrase,
-            "firstOperand": newFirstOperand,
-            "operator": newOperator,
-            "secondOperand": newSecondOperand,
-            "equationResult": newArithmeticResult,
-            "multipleChoices": newMultipleChoices
+    const disableButton = (...buttons) => {
+        for (const button of buttons)
+        {
+            const buttonText = button.innerHTML;
+            button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+            button.classList.add("disabled");
+            button.classList.remove("enabled");
+            if (buttonText.toUpperCase() === "PREV")
+            {
+                button.setAttribute("title", "There are no previous questions");
+            } else if (buttonText.toUpperCase() === "NEXT")
+            {
+                button.setAttribute("title", "You must pass the equation at least once before you can proceed to the next question.");
+            }
         }
-        saveEquationData(newEquationData);
-        resetAnswerStyle();
-    });
+    };
 
-    // reload the saved equation when the retry button is clicked
-    const retryButton = document.getElementById("retry-button");
-    retryButton.addEventListener("click", () => {
-        const savedEquationData = localStorage.getItem("equationData");
-        const phrase = JSON.parse(savedEquationData).equationPhrase;
-        const firstOperand = JSON.parse(savedEquationData).firstOperand;
-        const operator = JSON.parse(savedEquationData).operator;
-        const secondOperand = JSON.parse(savedEquationData).secondOperand;
-        const multipleChoices = JSON.parse(savedEquationData).multipleChoices;
-        document.getElementById("equation-result").innerHTML = "?";
-        //styleEquationResult();
-        resetAnswerStyle();
-        displayEquation(phrase, firstOperand, operator, secondOperand, multipleChoices);
+    const enableButton = (...buttons) => {
+        for (const button of buttons)
+        {
+            const buttonText = button.innerHTML;
+            button.disabled = false;
+            button.setAttribute("aria-disabled", "false");
+            button.classList.remove("disabled");
+            button.classList.add("enabled");
 
-    });
+            if (buttonText.toUpperCase() === "PREV")
+            {
+                button.setAttribute("title", "Go to the previous question.");
+            } else if (buttonText.toUpperCase() === "NEXT")
+            {
+                button.setAttribute("title", "Go to the next question.");
+            }
+        }
+    };
 
-    // check the answer when the check button is clicked
+    // Buttons global variables
+    const previousButton = document.getElementById("previous-button");
     const checkButton = document.getElementById("check-button");
-    checkButton.addEventListener("click", () => {
-        const answerElement = document.getElementById("equation-result");
-        const answer = answerElement.innerHTML;
-
-        const savedEquationData = localStorage.getItem("equationData");
-        const savedEquationResult = JSON.parse(savedEquationData).equationResult;
-
-        //const mathEquation = JSON.parse(localStorage.getItem("mathEquation"));
-        if (parseInt(answer) === savedEquationResult) {
-            styleAnswer(true);
-        } else {
-            styleAnswer(false);
-        }
-    });
-
+    const nextButton = document.getElementById("next-button");
+    const answerElement = document.getElementById("equation-result");
 
     // Style the answer element when the check button is clicked
-    const answerElement = document.getElementById("equation-result");
-    const styleAnswer = (flag) => {
-        if (flag) {
-            answerElement.style.backgroundColor = "lightgreen";
-            answerElement.style.color = "darkgreen";
-        } else {
-            answerElement.style.backgroundColor = "lightpink";
-            answerElement.style.color = "darkred";
+    const comment = document.getElementById("answer-comment");
+    comment.style.display = "none";
+    const styleAnswer = (state) => {
+        comment.style.display = "block";
+        if (state === 0)
+        {
+            answerElement.classList.remove("correct-answer");
+            answerElement.classList.remove("incorrect-answer");
+            answerElement.classList.add("numbers");
+        } else if (state === 1)
+        {
+            answerElement.classList.remove("incorrect-answer");
+            comment.classList.remove("incorrect-comment");
+            answerElement.classList.add("correct-answer");
+            comment.classList.add("positive-comment");
+            comment.innerHTML = correctComments[ Math.floor(Math.random() * correctComments.length) ];
+        } else if (state === 2)
+        {
+            answerElement.classList.remove("correct-answer");
+            comment.classList.remove("positive-comment");
+            answerElement.classList.add("incorrect-answer");
+            comment.classList.add("incorrect-comment");
+            comment.innerHTML = incorrectComments[ Math.floor(Math.random() * incorrectComments.length) ];
         }
+
+        // hide the comment after 1 second and make sure the event is only triggered once
+        setTimeout(() => {
+            comment.style.display = "none";
+        }
+            , 2000);
+    };
+
+    // reload the saved equation when the previous button is clicked
+    // previousButton.addEventListener("click", () => {
+    //     const previousEquations = localStorage.getItem("previousEquations");
+    //     clearAndResetAnswerElement();
+    //     if (previousEquations)
+    //     {
+    //         const previousEquationsArray = JSON.parse(previousEquations);
+    //         for (let i = previousEquationsArray.length - 1; i >= 0; i--)
+    //         {
+    //             const equationData = previousEquationsArray[ i ];
+    //             const isCorrect = JSON.parse(equationData).isCorrect;
+    //             if (isCorrect)
+    //             {
+    //                 const phrase = JSON.parse(equationData).arithmeticPhrase;
+    //                 const firstOperand = JSON.parse(equationData).firstOperand;
+    //                 const operator = JSON.parse(equationData).operator;
+    //                 const secondOperand = JSON.parse(equationData).secondOperand;
+    //                 const multipleChoices = JSON.parse(equationData).multipleChoices;
+    //                 displayEquation(phrase, firstOperand, operator, secondOperand, multipleChoices);
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     resetAnswerStyle();
+    // });
+
+    // Generate a new equation with answers choices and display it on the page when the next button is clicked
+    // nextButton.addEventListener("click", () => {
+    //     saveEquation(getRandomArithmeticEquation(arithmeticOperations));
+    //     clearAndResetAnswerElement();
+    //     displayEquation();
+    //     //savePreviousEquations(getRecentEquation());
+    //
+    //     const previousEquationsCount = getPreviousEquations().length;
+    //     equationNumberElement.innerHTML = `${ previousEquationsCount }. `;
+    //     resetAnswerStyle();
+    //     if (previousEquationsCount === 0)
+    //     {
+    //         disableButton(previousButton);
+    //     } else
+    //     {
+    //         enableButton(previousButton);
+    //     }
+    //
+    //     disableButton(nextButton);
+    // });
+
+    const triggerNextButton = () => {
+        saveEquation(getRandomArithmeticEquation(arithmeticOperations));
+        clearAndResetAnswerElement();
+        displayEquation();
+        resetAnswerStyle();
     }
+
+    // check the answer when the check button is clicked
+    const checkAnswer = () => {
+        checkButton.addEventListener("click", () => {
+            const equationData = JSON.parse(localStorage.getItem("equationData"));
+            const userAnswer = parseInt(document.getElementById("equation-result").innerHTML);
+            const equationResult = equationData.result;
+            if (userAnswer === equationResult) {
+                styleAnswer(1);
+                equationData.isCorrect = true;
+                // enableButton(nextButton);
+
+                setTimeout(() => {
+                    //trigger the next button
+                    triggerNextButton();
+                }, 2500);
+
+            } else {
+                styleAnswer(2);
+            }
+        });
+    };
+
+    checkAnswer();
+
 
     // reset the answer element when the reset button or next button is clicked
     const resetAnswerStyle = () => {
-        answerElement.style.backgroundColor = "#2f2f2f";
-        answerElement.style.color = "#ffffff99";
-        answerElement.style.border = "none";
-    }
+        answerElement.classList.remove("correct-answer");
+        answerElement.classList.remove("incorrect-answer");
+        answerElement.classList.add("operators");
+    };
+
+    const clearAndResetAnswerElement = () => answerElement.innerHTML = "?";
+
+    const equationNumberElement = document.getElementById("equation-number");
 
     // Populate the page with the generated equation on window.onload
     window.onload = () => {
-        // Get a random arithmetic equation
-        const arithmeticEquationObject = getRandomArithmeticEquation(arithmeticOperations);
-        const arithmeticEquation = arithmeticEquationObject.equation;
-        const arithmeticOperator = arithmeticEquationObject.operator;
-        const arithmeticPhrase = generateArithmeticEquationPhrase(arithmeticOperator);
-        const equationResult = arithmeticEquationObject.result;
-        const operandsAndOperators = arithmeticEquation.split(" ");
-        const firstOperand = operandsAndOperators[0];
-        const operator = operandsAndOperators[1];
-        const secondOperand = operandsAndOperators[2];
-        const multipleChoices = shuffleArray(getMultipleChoices(equationResult));
-
-
-
-        displayEquation(arithmeticPhrase, firstOperand, operator, secondOperand, multipleChoices);
-
-        const equationData = {
-            "equationPhrase": arithmeticPhrase,
-            "firstOperand": firstOperand,
-            "operator": operator,
-            "secondOperand": secondOperand,
-            "equationResult": equationResult,
-            "multipleChoices": multipleChoices
-        }
-        saveEquationData(equationData);
-    }
+        displayCopyrightYear();
+        saveEquation(getRandomArithmeticEquation(arithmeticOperations));
+        displayEquation();
+        disableButton(previousButton, nextButton);
+        nextButton.style.display = "none";
+        previousButton.style.display = "none";
+    };
 }());

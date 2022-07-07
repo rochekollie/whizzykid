@@ -13,33 +13,63 @@
 <body>
 <div id="interface">
     <header>
-        <h1 id="app-name">WhizzyKid</h1>
+        <a href="./">
+            <h1 id="app-name">
+                <span class="red">W</span>
+                <span class="orange">h</span>
+                <span class="yellow">i</span>
+                <span class="green">z</span>
+                <span class="">z</span>
+                <span class="cyan">y</span>
+                <span class="blue">K</span>
+                <span class="violet">i</span>
+                <span class="yellowgreen">d</span>
+            </h1>
+        </a>
     </header>
     <main>
-        <h2>Find the <span id="equation-phrase"></span> of the two numbers:</h2>
+        <h2>
+            <span id="equation-number" class="operators"></span>
+            What is the
+            <span id="equation-phrase">sum</span>
+            of the two numbers<span class="operators(1)">?</span>
+        </h2>
         <div id="equation">
-            <span class="numbers operands-and-operators" id="first-operand-element"></span>
-            <span class="operators operands-and-operators" id="operator-element"></span>
-            <span class="numbers operands-and-operators" id="second-operand-element"></span>
+            <span class="numbers operands-and-operators" id="first-operand-element">0</span>
+            <span class="operators operands-and-operators" id="operator-element">+</span>
+            <span class="numbers operands-and-operators"
+                  id="second-operand-element">0</span>
             <span class="operators operands-and-operators" id="equal-sign-element">=</span>
-            <span class="operators operands-and-operators" id="equation-result">?</span>
+            <span class="operators operands-and-operators" id="equation-result"
+                  contenteditable="true">?</span>
         </div>
+        <p id="answer-comment"></p>
         <div id="answer-choices-container">
-            <button type="button" class="answer-choices" id="answer-choice-1-button"></button>
-            <button type="button" class="answer-choices" id="answer-choice-2-button"></button>
-            <button type="button" class="answer-choices" id="answer-choice-3-button"></button>
-            <button type="button" class="answer-choices" id="answer-choice-4-button"></button>
+            <button type="button" class="answer-choices"
+                    id="answer-choice-1-button">1
+            </button>
+            <button type="button" class="answer-choices"
+                    id="answer-choice-2-button">0
+            </button>
+            <button type="button" class="answer-choices"
+                    id="answer-choice-3-button">3
+            </button>
+            <button type="button" class="answer-choices"
+                    id="answer-choice-4-button">2
+            </button>
         </div>
         <div class="action-buttons-container">
-            <button class="action-buttons" id="retry-button">Retry</button>
+<!--            <button class="action-buttons text-buttons" id="previous-button">Prev</button>-->
             <button class="action-buttons" id="check-button">Check</button>
-            <button class="action-buttons" id="next-button">Next</button>
+<!--            <button class="action-buttons text-buttons" id="next-button">Next</button>-->
         </div>
     </main>
     <footer>
-        <p>&copy; <span id="copyright-year"></span> WhizzyKid | Made with <span id="heart">&hearts;</span>  by <a href="#">Roche Kollie</a></p>
+        <p>&copy;<span id="copyright-year"></span> WhizzyKid</p>
+        <p>Made with <span id="heart">&hearts;</span> by <a href="#">Roche Kollie</a>
+        </p>
     </footer>
 </div>
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
 </body>
 </html>

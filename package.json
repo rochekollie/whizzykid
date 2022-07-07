@@ -1,0 +1,20 @@
+{
+  "name": "whizzykid",
+  "version": "1.0.0",
+  "description": "[https://whizzykid.netlify.app](https://whizzykid.netlify.app)",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rochekollie/whizzykid.git"
+  },
+  "keywords": [],
+  "author": "Roche Kollie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rochekollie/whizzykid/issues"
+  },
+  "homepage": "https://github.com/rochekollie/whizzykid#readme"
+}
