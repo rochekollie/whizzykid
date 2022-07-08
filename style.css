@@ -1,3 +1,16 @@
+:root {
+
+    /* Themes */
+    --seagreen-theme: #007566;
+    --robynpink-theme: #F24EAA;
+    --rebeccapurple-theme: #663399;
+    --desertland-theme: #D96941;
+    --rubyred-theme: #E84A54;
+    --skyblue-theme: #00A2FF;
+    --solarized-theme: #B58900;
+    --sandybeach-theme: #D8B08C;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -202,11 +215,11 @@ a:active {
     margin: 0;
     padding: 0;
     width: calc(100px - 2rem);
+    height: auto;
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto;
 }
 
 .operators {
@@ -252,7 +265,7 @@ a:active {
 }
 
 .action-buttons-container {
-    width: 100%;
+    width: auto;
     font-size: 2.5rem;
     font-weight: bold;
     cursor: pointer;
@@ -331,6 +344,6 @@ a:active {
 }
 
 #interface {
-    background: #D96941;
+    background: var(--desertland-theme);
 }
 

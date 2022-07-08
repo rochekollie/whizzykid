@@ -1,4 +1,4 @@
-import {correctComments, incorrectComments}  from "./comments.js";
+import {correctComments, incorrectComments} from "./comments.js";
 
 (function () {
     "use strict";
@@ -8,12 +8,10 @@ import {correctComments, incorrectComments}  from "./comments.js";
         const launchYear = "2022";
         const currentYear = new Date().getFullYear();
 
-        if (parseInt(launchYear) === currentYear)
-        {
-            currentYearElement.innerHTML = `${ currentYear }`;
-        } else
-        {
-            currentYearElement.innerHTML = `${ launchYear } - ${ currentYear }`;
+        if (parseInt(launchYear) === currentYear) {
+            currentYearElement.innerHTML = `${currentYear}`;
+        } else {
+            currentYearElement.innerHTML = `${launchYear} - ${currentYear}`;
         }
     }
 
@@ -51,7 +49,7 @@ import {correctComments, incorrectComments}  from "./comments.js";
      * @example getRandomArithmeticOperator(['+', '-', '*', '/']) // returns a random arithmetic operator
      * */
     function getRandomArithmeticOperator(array) {
-        return array[ Math.floor(Math.random() * array.length) ];
+        return array[Math.floor(Math.random() * array.length)];
     }
 
     /**
@@ -87,8 +85,7 @@ import {correctComments, incorrectComments}  from "./comments.js";
 
         const equation = `${operand1} ${operator} ${operand2}`;
 
-        switch (operator)
-        {
+        switch (operator) {
             case addition: {
                 number = operand1 + operand2;
                 break;
@@ -127,17 +124,13 @@ import {correctComments, incorrectComments}  from "./comments.js";
      * @example getArithmeticWord('+') // returns a string containing a mathematical equation phrase
      * */
     function getArithmeticWord(operator) {
-        if (operator === "+")
-        {
+        if (operator === "+") {
             return "sum";
-        } else if (operator === "-")
-        {
+        } else if (operator === "-") {
             return 'difference';
-        } else if (operator === "*")
-        {
+        } else if (operator === "*") {
             return 'product';
-        } else if (operator === "/")
-        {
+        } else if (operator === "/") {
             return 'quotient';
         }
     }
@@ -155,14 +148,16 @@ import {correctComments, incorrectComments}  from "./comments.js";
         const multipleChoices = [];
         multipleChoices.push(equationResult);
         for (let i = 0; i < 3; i++) {
-            let choice = getRandomOperand(operandMinValue, operandMaxValue);
+            let choice = getRandomOperand(operandMinValue, (equationResult + operandMaxValue));
             // check if the choice is already in the array
-            if (multipleChoices.includes(choice))
-            {
+            if (multipleChoices.includes(choice)) {
                 i--; // if it is, try again
-            } else
-            {
-                multipleChoices.push(choice); // if not, add it to the array
+            } else {
+                if (!((choice - 5) < equationResult || (choice + 5) > equationResult)) {
+                    i--; // if it is not, check if it is within 5 of the given number
+                } else {
+                    multipleChoices.push(choice);
+                }
             }
         }
         return multipleChoices;
@@ -214,7 +209,7 @@ import {correctComments, incorrectComments}  from "./comments.js";
     /**
      * Displays an object property values as an equation string on the page
      * */
-    function displayEquation () {
+    function displayEquation() {
         const equationData = JSON.parse(localStorage.getItem("equationData"));
         equationPhraseElement.innerHTML = equationData.phrase;
         firstOperandElement.innerHTML = equationData.firstOperand;
@@ -226,7 +221,7 @@ import {correctComments, incorrectComments}  from "./comments.js";
         answerChoiceElements[3].innerHTML = equationData.multipleChoices[3];
     }
 
-    function saveEquation (object) {
+    function saveEquation(object) {
         const equation = object.equation.split(" ");
         const multipleChoices = shuffleArray(getMultipleChoices(object.result));
         const equationData = {
@@ -241,14 +236,13 @@ import {correctComments, incorrectComments}  from "./comments.js";
         localStorage.setItem("equationData", JSON.stringify(equationData));
     }
 
-    function getRecentEquation () {
+    function getRecentEquation() {
         return JSON.parse(localStorage.getItem("equationData"));
     }
 
     const savePreviousEquations = (equationData) => {
         const previousEquations = localStorage.getItem("previousEquations");
-        if (previousEquations)
-        {
+        if (previousEquations) {
             previousEquations.push(equationData);
             localStorage.setItem("previousEquations", JSON.stringify(previousEquations));
         } else {
@@ -306,37 +300,31 @@ import {correctComments, incorrectComments}  from "./comments.js";
     }
 
     const disableButton = (...buttons) => {
-        for (const button of buttons)
-        {
+        for (const button of buttons) {
             const buttonText = button.innerHTML;
             button.disabled = true;
             button.setAttribute("aria-disabled", "true");
             button.classList.add("disabled");
             button.classList.remove("enabled");
-            if (buttonText.toUpperCase() === "PREV")
-            {
+            if (buttonText.toUpperCase() === "PREV") {
                 button.setAttribute("title", "There are no previous questions");
-            } else if (buttonText.toUpperCase() === "NEXT")
-            {
+            } else if (buttonText.toUpperCase() === "NEXT") {
                 button.setAttribute("title", "You must pass the equation at least once before you can proceed to the next question.");
             }
         }
     };
 
     const enableButton = (...buttons) => {
-        for (const button of buttons)
-        {
+        for (const button of buttons) {
             const buttonText = button.innerHTML;
             button.disabled = false;
             button.setAttribute("aria-disabled", "false");
             button.classList.remove("disabled");
             button.classList.add("enabled");
 
-            if (buttonText.toUpperCase() === "PREV")
-            {
+            if (buttonText.toUpperCase() === "PREV") {
                 button.setAttribute("title", "Go to the previous question.");
-            } else if (buttonText.toUpperCase() === "NEXT")
-            {
+            } else if (buttonText.toUpperCase() === "NEXT") {
                 button.setAttribute("title", "Go to the next question.");
             }
         }
@@ -353,31 +341,28 @@ import {correctComments, incorrectComments}  from "./comments.js";
     comment.style.display = "none";
     const styleAnswer = (state) => {
         comment.style.display = "block";
-        if (state === 0)
-        {
+        if (state === 0) {
             answerElement.classList.remove("correct-answer");
             answerElement.classList.remove("incorrect-answer");
             answerElement.classList.add("numbers");
-        } else if (state === 1)
-        {
+        } else if (state === 1) {
             answerElement.classList.remove("incorrect-answer");
             comment.classList.remove("incorrect-comment");
             answerElement.classList.add("correct-answer");
             comment.classList.add("positive-comment");
-            comment.innerHTML = correctComments[ Math.floor(Math.random() * correctComments.length) ];
-        } else if (state === 2)
-        {
+            comment.innerHTML = correctComments[Math.floor(Math.random() * correctComments.length)];
+        } else if (state === 2) {
             answerElement.classList.remove("correct-answer");
             comment.classList.remove("positive-comment");
             answerElement.classList.add("incorrect-answer");
             comment.classList.add("incorrect-comment");
-            comment.innerHTML = incorrectComments[ Math.floor(Math.random() * incorrectComments.length) ];
+            comment.innerHTML = incorrectComments[Math.floor(Math.random() * incorrectComments.length)];
         }
 
         // hide the comment after 1 second and make sure the event is only triggered once
         setTimeout(() => {
-            comment.style.display = "none";
-        }
+                comment.style.display = "none";
+            }
             , 2000);
     };
 
