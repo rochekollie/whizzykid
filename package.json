@@ -2,7 +2,7 @@
   "name": "whizzykid",
   "version": "1.0.0",
   "description": "[https://whizzykid.netlify.app](https://whizzykid.netlify.app)",
-  "main": "script.js",
+  "main": "scripts/script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

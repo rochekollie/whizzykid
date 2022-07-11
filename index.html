@@ -4,43 +4,307 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhizzyKid - The Future Innovators</title>
+    <title>WhizzyKid - Training Tomorrow's Innovators</title>
+    <!-- Favicon -->
+    <!-- Material Icons -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <!--  Google fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Play:wght@400;700&display=swap"
+            rel="stylesheet">
+    <!--  Site styles  -->
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 <div id="interface">
     <header>
-        <a href="./">
-            <h1 id="app-name">
-                <span class="red">W</span>
-                <span class="orange">h</span>
-                <span class="yellow">i</span>
-                <span class="green">z</span>
-                <span class="">z</span>
-                <span class="cyan">y</span>
-                <span class="blue">K</span>
-                <span class="violet">i</span>
-                <span class="yellowgreen">d</span>
-            </h1>
-        </a>
+        <div>
+            <div class="menu-icons">
+                <!-- Menu Open -->
+                <!--            <span class="material-symbols-outlined icons">menu_open</span>-->
+                <!-- Menu -->
+                <div class="material-symbols-outlined dropdown-icons">menu
+                    <div class="menu-elements dropdown-elements">
+                        <h2>Menu</h2>
+                        <!--                        <section>-->
+                        <!--                            <div>-->
+                        <!--                                <h3>Subjects</h3>-->
+                        <!--                                <nav class="input-settings-group subjects-menu">-->
+                        <!--                                    <ul>-->
+                        <!--                                        <li><a href="#">Science</a></li>-->
+                        <!--                                        <li><a href="#">Technology</a></li>-->
+                        <!--                                        <li><a href="#">Arts</a></li>-->
+                        <!--                                        <li><a href="#">Engineering</a></li>-->
+                        <!--                                        <li><a href="#">Mathematics</a></li>-->
+                        <!--                                    </ul>-->
+                        <!--                                </nav>-->
+                        <!--                            </div>-->
+                        <!--                        </section>-->
+                        <!--                        <section>-->
+                        <!--                            <div>-->
+                        <!--                                <h3>My Account</h3>-->
+                        <!--                                <nav class="input-settings-group">-->
+                        <!--                                    <ul>-->
+                        <!--                                        <li><a href="#">Dashboard</a></li>-->
+                        <!--                                        <li><a href="#">Profile</a></li>-->
+                        <!--                                        <li><a href="#">Logout</a></li>-->
+                        <!--                                    </ul>-->
+                        <!--                                </nav>-->
+                        <!--                            </div>-->
+                        <!--                        </section>-->
+                        <section>
+                            <div>
+                                <h3>Support</h3>
+                                <nav class="input-settings-group">
+                                    <ul>
+                                        <!--                                        <li><a href="#">About Us</a></li>-->
+                                        <li><a href="mailto:enteric_lacquer_0b@icloud.com">Contact Us</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a href="./" id="app-name-link">
+                <h1 id="app-name">
+                    <div class="app-letters-wrapper">
+                        <span class="red">W</span>
+                        <span class="orange">h</span>
+                        <span class="yellow">i</span>
+                        <span class="green">z</span>
+                        <span id="z">z</span>
+                        <span class="cyan">y</span>
+                    </div>
+                    <div class="app-letters-wrapper">
+                        <span class="blue">K</span>
+                        <span class="violet">i</span>
+                        <span class="yellowgreen">d</span>
+                    </div>
+                </h1>
+            </a>
+        </div>
+        <div class="material-symbols-outlined dropdown-icons">settings
+            <div class="settings-elements dropdown-elements">
+                <h2>Settings</h2>
+                <section>
+                    <div>
+                        <h3>Appearance</h3>
+                        <div class="input-settings-group">
+                            <label for="theme-selector">Theme color</label>
+                            <select id="theme-selector">
+                                <option value="white">White</option>
+                                <option value="black">Black</option>
+                                <option value="blue">Blue</option>
+                                <option value="brown">Brown</option>
+                                <option value="coral">Coral</option>
+                                <option value="crimson">Crimson</option>
+                                <option value="cyan">Cyan</option>
+                                <option value="gray">Gray</option>
+                                <option value="green">Green</option>
+                                <option value="indianred">Indianred</option>
+                                <option value="indigo">Indigo</option>
+                                <option value="khaki">Khaki</option>
+                                <option value="lime">Lime</option>
+                                <option value="magenta">Magenta</option>
+                                <option value="maroon">Maroon</option>
+                                <option value="mauve">Mauve</option>
+                                <option value="navy">Navy</option>
+                                <option value="olive">Olive</option>
+                                <option value="orange">Orange</option>
+                                <option value="pink">Pink</option>
+                                <option value="puce">Puce</option>
+                                <option value="purple">Purple</option>
+                                <option value="red">Red</option>
+                                <option value="ruby">Ruby</option>
+                                <option value="saddlebrown">Saddlebrown</option>
+                                <option value="salmon">Salmon</option>
+                                <option value="silver">Silver</option>
+                                <option value="tan">Tan</option>
+                                <option value="teal">Teal</option>
+                                <option value="turquoise">Turquoise</option>
+                                <option value="violet">Violet</option>
+                                <option value="yellow">Yellow</option>
+                            </select>
+                        </div>
+<!--                        <div class="input-settings-group">-->
+<!--                            <label for="font-selector">Font</label>-->
+<!--                            <select id="font-selector">-->
+<!--                                <option value="play">Play</option>-->
+<!--                                <option value="edu-nsw-act-foundation">Edu NSW Act</option>-->
+<!--                                <option value="splash">Splash</option>-->
+<!--                                <option value="dosis">Dosis</option>-->
+<!--                                <option value="shadows-into-light">Shadows Into Light</option>-->
+<!--                                <option value="permanent-marker">Permanent Marker</option>-->
+<!--                                <option value="gloria-hallelujah">Gloria Hallelujah</option>-->
+<!--                                <option value="special-elite">Special Elite</option>-->
+<!--                                <option value="handlee">Handlee</option>-->
+<!--                                <option value="pangolin">Pangolin</option>-->
+<!--                                <option value="architects-daughter">Architects Daughter</option>-->
+<!--                                <option value="rock-salt">Rock Salt</option>-->
+<!--                                <option value="homemade-apple">Homemade Apple</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+                    </div>
+                </section>
+<!--                <section>-->
+<!--                    <div>-->
+<!--                        <h3>Equation Options</h3>-->
+<!--                        <div class="input-settings-group">-->
+<!--                            <label for="number-of-questions">Questions limit</label>-->
+<!--                            <select id="number-of-questions">-->
+<!--                                <option value="5">5</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                                <option value="15">15</option>-->
+<!--                                <option value="20" selected>20</option>-->
+<!--                                <option value="25">25</option>-->
+<!--                                <option value="30">30</option>-->
+<!--                                <option value="35">35</option>-->
+<!--                                <option value="40">40</option>-->
+<!--                                <option value="45">45</option>-->
+<!--                                <option value="50">50</option>-->
+<!--                                <option value="55">55</option>-->
+<!--                                <option value="60">60</option>-->
+<!--                                <option value="65">65</option>-->
+<!--                                <option value="70">70</option>-->
+<!--                                <option value="75">75</option>-->
+<!--                                <option value="80">80</option>-->
+<!--                                <option value="85">85</option>-->
+<!--                                <option value="90">90</option>-->
+<!--                                <option value="95">95</option>-->
+<!--                                <option value="100">100</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="input-settings-group">-->
+<!--                        <label for="number-of-terms">Terms limit</label>-->
+<!--                        <select id="number-of-terms">-->
+<!--                            <option value="2" selected>2</option>-->
+<!--                            <option value="3">3</option>-->
+<!--                            <option value="4">4</option>-->
+<!--                            <option value="5">5</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </section>-->
+<!--                <section>-->
+<!--                    <div>-->
+<!--                        <h3>Math Operations</h3>-->
+<!--                        <div class="checkbox-settings-group">-->
+<!--                            <input type="checkbox" id="addition-checkbox"-->
+<!--                                   name="addition-checkbox" value="addition" checked>-->
+<!--                            <label for="addition-checkbox">Addition</label>-->
+<!--                        </div>-->
+<!--                        <div class="checkbox-settings-group">-->
+<!--                            <input type="checkbox" id="subtraction-checkbox"-->
+<!--                                   name="subtraction-checkbox" value="subtraction" checked>-->
+<!--                            <label for="subtraction-checkbox">Subtraction</label>-->
+<!--                        </div>-->
+<!--                        <div class="checkbox-settings-group">-->
+<!--                            <input type="checkbox" id="multiplication-checkbox"-->
+<!--                                   name="multiplication-checkbox" value="multiplication">-->
+<!--                            <label for="multiplication-checkbox">Multiplication</label>-->
+<!--                        </div>-->
+<!--                        <div class="checkbox-settings-group">-->
+<!--                            <input type="checkbox" id="division-checkbox"-->
+<!--                                   name="division-checkbox" value="division">-->
+<!--                            <label for="division-checkbox">Division</label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </section>-->
+<!--                <section>-->
+<!--                    <div>-->
+<!--                        <h3>Answer Options</h3>-->
+<!--                        <div class="checkbox-settings-group">-->
+<!--                            <input type="checkbox" id="negative-answer-checkbox"-->
+<!--                                   name="negative-answer-checkbox" value="negative-answer">-->
+<!--                            <label for="negative-answer-checkbox">Allow negative-->
+<!--                                answer</label>-->
+<!--                        </div>-->
+<!--                        <div class="checkbox-settings-group">-->
+<!--                            <input type="checkbox" id="decimal-answer-checkbox"-->
+<!--                                   name="decimal-answer-checkbox" value="decimal-answer">-->
+<!--                            <label for="decimal-answer-checkbox">Allow decimal-->
+<!--                                answer</label>-->
+<!--                        </div>-->
+<!--                        <div class="checkbox-settings-group">-->
+<!--                            <input type="checkbox" id="zero-answer-checkbox"-->
+<!--                                   name="zero-answer-checkbox" value="zero-answer">-->
+<!--                            <label for="zero-answer-checkbox">Allow zero answer</label>-->
+<!--                        </div>-->
+<!--                        <div class="checkbox-settings-group">-->
+<!--                            <input type="checkbox" id="show-answer-checkbox"-->
+<!--                                   name="show-answer-checkbox" value="show-answer" checked>-->
+<!--                            <label for="show-answer-checkbox">Show answer-->
+<!--                                choices</label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </section>-->
+<!--                <section>-->
+<!--                    <div>-->
+<!--                        <h3>Timer Options</h3>-->
+<!--                        <div class="checkbox-input-settings-group">-->
+<!--                            <div class="radio-settings-group">-->
+<!--                                &lt;!&ndash; FIXME: space between the two flex items &ndash;&gt;-->
+<!--                                <div class="input-settings-group">-->
+<!--                                    <label for="allow-timer">Allow timer</label>-->
+<!--                                    <select id="allow-timer">-->
+<!--                                        <option value="no">No</option>-->
+<!--                                        <option value="yes">Yes</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="checkbox-settings-group">-->
+<!--                                    <input type="radio" id="10-seconds"-->
+<!--                                           name="timer-type-radio" value="10-seconds">-->
+<!--                                    <label for="15-seconds">10 seconds</label>-->
+<!--                                </div>-->
+<!--                                <div class="checkbox-settings-group">-->
+<!--                                    <input type="radio" id="15-seconds"-->
+<!--                                           name="timer-type-radio" value="15-seconds">-->
+<!--                                    <label for="15-seconds">15 seconds</label>-->
+<!--                                </div>-->
+<!--                                <div class="checkbox-settings-group">-->
+<!--                                    <input type="radio" id="30-seconds"-->
+<!--                                           name="timer-type-radio" value="30-seconds" checked>-->
+<!--                                    <label for="30-seconds">30 seconds</label>-->
+<!--                                </div>-->
+<!--                                <div class="checkbox-settings-group">-->
+<!--                                    <input type="radio" id="45-seconds"-->
+<!--                                           name="timer-type-radio" value="45-seconds">-->
+<!--                                    <label for="45-seconds">45 seconds</label>-->
+<!--                                </div>-->
+<!--                                <div class="checkbox-settings-group">-->
+<!--                                    <input type="radio" id="60-seconds"-->
+<!--                                           name="timer-type-radio" value="60-seconds">-->
+<!--                                    <label for="60-seconds">60 seconds</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </section>-->
+            </div>
+        </div>
     </header>
     <main>
         <h2>
-            <span id="equation-number" class="operators"></span>
+            <span id="equation-number" class="operators">1.</span>
             What is the
             <span id="equation-phrase">sum</span>
             of the two numbers<span class="operators(1)">?</span>
         </h2>
-        <div id="equation">
-            <span class="numbers operands-and-operators" id="first-operand-element">0</span>
-            <span class="operators operands-and-operators" id="operator-element">+</span>
-            <span class="numbers operands-and-operators"
-                  id="second-operand-element">0</span>
-            <span class="operators operands-and-operators" id="equal-sign-element">=</span>
-            <span class="operators operands-and-operators" id="equation-result">?</span>
+        <div id="equation-container">
+            <div>
+                <span class="numbers operands-and-operators" id="first-operand-element">0</span>
+                <span class="operators operands-and-operators" id="operator-element">+</span>
+                <span class="numbers operands-and-operators"
+                      id="second-operand-element">0</span>
+                <span class="operators operands-and-operators" id="equal-sign-element">=</span>
+                <span class="operators operands-and-operators" id="equation-result">?</span>
+            </div>
         </div>
         <p id="answer-comment"></p>
         <div id="answer-choices-container">
@@ -58,17 +322,18 @@
             </button>
         </div>
         <div class="action-buttons-container">
-<!--            <button class="action-buttons text-buttons" id="previous-button">Prev</button>-->
+            <!--            <button class="action-buttons text-buttons" id="previous-button">Prev</button>-->
             <button class="action-buttons" id="check-button">Check</button>
-<!--            <button class="action-buttons text-buttons" id="next-button">Next</button>-->
+            <!--            <button class="action-buttons text-buttons" id="next-button">Next</button>-->
         </div>
     </main>
     <footer>
         <p>&copy;<span id="copyright-year"></span> WhizzyKid</p>
-        <p>Made with <span id="heart">&hearts;</span> by <a href="#">Roche Kollie</a>
+        <p>Made with <span id="heart">&hearts;</span> by <a href="mailto:enteric_lacquer_0b@icloud.com">Roche Kollie</a>
         </p>
     </footer>
 </div>
-<script type="module" src="script.js"></script>
+<script type="module" src="scripts/main.js"></script>
+<!--<script src="scripts/theme-switcher.js"></script>-->
 </body>
 </html>
