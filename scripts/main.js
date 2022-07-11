@@ -1,4 +1,5 @@
-import {correctComments, incorrectComments} from "./comments.js";
+import { correctComments, incorrectComments } from "./comments.js";
+import { switchTheme, reloadTheme } from "./theme-switcher.js";
 
 (function () {
     "use strict";
@@ -8,10 +9,12 @@ import {correctComments, incorrectComments} from "./comments.js";
         const launchYear = "2022";
         const currentYear = new Date().getFullYear();
 
-        if (parseInt(launchYear) === currentYear) {
-            currentYearElement.innerHTML = `${currentYear}`;
-        } else {
-            currentYearElement.innerHTML = `${launchYear} - ${currentYear}`;
+        if (parseInt(launchYear) === currentYear)
+        {
+            currentYearElement.innerHTML = `${ currentYear }`;
+        } else
+        {
+            currentYearElement.innerHTML = `${ launchYear } - ${ currentYear }`;
         }
     }
 
@@ -35,12 +38,88 @@ import {correctComments, incorrectComments} from "./comments.js";
     const subtraction = '-';
     const multiplication = '*';
     const division = '/';
-    const arithmeticOperations = [
-        addition,
-        subtraction,
-        multiplication,
-        division
-    ];
+
+    //get the user choice of the arithmetic operation based on the checkbox values
+    function getUserArithmeticOperatorsChoice() {
+        const additionCheckbox = document.getElementById("addition-checkbox");
+        const subtractionCheckbox = document.getElementById("subtraction-checkbox");
+        const multiplicationCheckbox = document.getElementById("multiplication-checkbox");
+        const divisionCheckbox = document.getElementById("division-checkbox");
+
+        let arithmeticOperations = [];
+
+        if (additionCheckbox.checked) {
+            arithmeticOperations.push(addition);
+        }
+
+        if (subtractionCheckbox.checked) {
+            arithmeticOperations.push(subtraction);
+        }
+
+        if (multiplicationCheckbox.checked) {
+            arithmeticOperations.push(multiplication);
+        }
+
+        if (divisionCheckbox.checked) {
+            arithmeticOperations.push(division);
+        }
+
+        //save the user choice in local storage
+        localStorage.setItem("arithmeticOperations", JSON.stringify(arithmeticOperations));
+
+        return arithmeticOperations;
+    }
+
+    // set the user choice of arithmetic operators to the array of arithmetic operations on click events
+    // function setUserArithmeticOperatorsChoice() {
+    //     const additionCheckbox = document.getElementById("addition-checkbox");
+    //     const subtractionCheckbox = document.getElementById("subtraction-checkbox");
+    //     const multiplicationCheckbox = document.getElementById("multiplication-checkbox");
+    //     const divisionCheckbox = document.getElementById("division-checkbox");
+    //
+    //     additionCheckbox.addEventListener("click", function () {
+    //         additionCheckbox.checked = !additionCheckbox.checked;
+    //     });
+    //
+    //     subtractionCheckbox.addEventListener("click", function () {
+    //         subtractionCheckbox.checked = !subtractionCheckbox.checked;
+    //     });
+    //
+    //     multiplicationCheckbox.addEventListener("click", function () {
+    //         multiplicationCheckbox.checked = !multiplicationCheckbox.checked;
+    //     });
+    //
+    //     divisionCheckbox.addEventListener("click", function () {
+    //         divisionCheckbox.checked = !divisionCheckbox.checked;
+    //     });
+    // }
+
+
+    //get the user arithmetic operation choice from local storage and set the checkbox values
+    function setUserArithmeticOperatorsChoice() {
+        const additionCheckbox = document.getElementById("addition-checkbox");
+        const subtractionCheckbox = document.getElementById("subtraction-checkbox");
+        const multiplicationCheckbox = document.getElementById("multiplication-checkbox");
+        const divisionCheckbox = document.getElementById("division-checkbox");
+
+        const arithmeticOperations = JSON.parse(localStorage.getItem("arithmeticOperations"));
+
+        if (arithmeticOperations.includes(addition)) {
+            additionCheckbox.checked = true;
+        }
+
+        if (arithmeticOperations.includes(subtraction)) {
+            subtractionCheckbox.checked = true;
+        }
+
+        if (arithmeticOperations.includes(multiplication)) {
+            multiplicationCheckbox.checked = true;
+        }
+
+        if (arithmeticOperations.includes(division)) {
+            divisionCheckbox.checked = true;
+        }
+    }
 
     /**
      * Gets a random arithmetic operator from a given array of arithmetic operators
@@ -49,7 +128,7 @@ import {correctComments, incorrectComments} from "./comments.js";
      * @example getRandomArithmeticOperator(['+', '-', '*', '/']) // returns a random arithmetic operator
      * */
     function getRandomArithmeticOperator(array) {
-        return array[Math.floor(Math.random() * array.length)];
+        return array[ Math.floor(Math.random() * array.length) ];
     }
 
     /**
@@ -64,28 +143,33 @@ import {correctComments, incorrectComments} from "./comments.js";
         let operand2 = getRandomOperand(operandMinValue, operandMaxValue);
         let number = 0;
 
-        if (operator === "-" && operand1 < operand2) {
+        if (operator === "-" && operand1 < operand2)
+        {
             number = operand2;
             operand2 = operand1;
             operand1 = number;
         }
-        if (operator === "/" && operator < operand2) {
+        if (operator === "/" && operator < operand2)
+        {
             number = operand2;
             operand2 = operand1;
             operand1 = number;
         }
 
         // Ensure when operator === '/' operands !== 0
-        if (operator === "/") {
-            while (operand2 === 0 || operand1 === 0 || operand1 % operand2 !== 0) {
+        if (operator === "/")
+        {
+            while (operand2 === 0 || operand1 === 0 || operand1 % operand2 !== 0)
+            {
                 operand1 = getRandomOperand(operandMinValue, operandMaxValue);
                 operand2 = getRandomOperand(operandMinValue, operandMaxValue);
             }
         }
 
-        const equation = `${operand1} ${operator} ${operand2}`;
+        const equation = `${ operand1 } ${ operator } ${ operand2 }`;
 
-        switch (operator) {
+        switch (operator)
+        {
             case addition: {
                 number = operand1 + operand2;
                 break;
@@ -124,13 +208,17 @@ import {correctComments, incorrectComments} from "./comments.js";
      * @example getArithmeticWord('+') // returns a string containing a mathematical equation phrase
      * */
     function getArithmeticWord(operator) {
-        if (operator === "+") {
+        if (operator === "+")
+        {
             return "sum";
-        } else if (operator === "-") {
+        } else if (operator === "-")
+        {
             return 'difference';
-        } else if (operator === "*") {
+        } else if (operator === "*")
+        {
             return 'product';
-        } else if (operator === "/") {
+        } else if (operator === "/")
+        {
             return 'quotient';
         }
     }
@@ -147,15 +235,20 @@ import {correctComments, incorrectComments} from "./comments.js";
     const getMultipleChoices = (equationResult) => {
         const multipleChoices = [];
         multipleChoices.push(equationResult);
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++)
+        {
             let choice = getRandomOperand(operandMinValue, (equationResult + operandMaxValue));
             // check if the choice is already in the array
-            if (multipleChoices.includes(choice)) {
+            if (multipleChoices.includes(choice))
+            {
                 i--; // if it is, try again
-            } else {
-                if (!((choice - 5) < equationResult || (choice + 5) > equationResult)) {
+            } else
+            {
+                if (!((choice - 5) < equationResult || (choice + 5) > equationResult))
+                {
                     i--; // if it is not, check if it is within 5 of the given number
-                } else {
+                } else
+                {
                     multipleChoices.push(choice);
                 }
             }
@@ -175,16 +268,17 @@ import {correctComments, incorrectComments} from "./comments.js";
         let currentIndex = array.length, temporaryValue, randomIndex;
 
         // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
+        while (0 !== currentIndex)
+        {
 
             // Pick a remaining element...
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
 
             // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
+            temporaryValue = array[ currentIndex ];
+            array[ currentIndex ] = array[ randomIndex ];
+            array[ randomIndex ] = temporaryValue;
         }
 
         // Version 2 of the shuffle algorithm
@@ -215,20 +309,20 @@ import {correctComments, incorrectComments} from "./comments.js";
         firstOperandElement.innerHTML = equationData.firstOperand;
         operatorElement.innerHTML = equationData.mathOperator;
         secondOperandElement.innerHTML = equationData.secondOperand;
-        answerChoiceElements[0].innerHTML = equationData.multipleChoices[0];
-        answerChoiceElements[1].innerHTML = equationData.multipleChoices[1];
-        answerChoiceElements[2].innerHTML = equationData.multipleChoices[2];
-        answerChoiceElements[3].innerHTML = equationData.multipleChoices[3];
+        answerChoiceElements[ 0 ].innerHTML = equationData.multipleChoices[ 0 ];
+        answerChoiceElements[ 1 ].innerHTML = equationData.multipleChoices[ 1 ];
+        answerChoiceElements[ 2 ].innerHTML = equationData.multipleChoices[ 2 ];
+        answerChoiceElements[ 3 ].innerHTML = equationData.multipleChoices[ 3 ];
     }
 
     function saveEquation(object) {
         const equation = object.equation.split(" ");
         const multipleChoices = shuffleArray(getMultipleChoices(object.result));
         const equationData = {
-            phrase: getArithmeticWord(equation[1]),
-            firstOperand: equation[0],
-            mathOperator: equation[1],
-            secondOperand: equation[2],
+            phrase: getArithmeticWord(equation[ 1 ]),
+            firstOperand: equation[ 0 ],
+            mathOperator: equation[ 1 ],
+            secondOperand: equation[ 2 ],
             result: object.result,
             multipleChoices: multipleChoices,
             isCorrect: false
@@ -242,10 +336,12 @@ import {correctComments, incorrectComments} from "./comments.js";
 
     const savePreviousEquations = (equationData) => {
         const previousEquations = localStorage.getItem("previousEquations");
-        if (previousEquations) {
+        if (previousEquations)
+        {
             previousEquations.push(equationData);
             localStorage.setItem("previousEquations", JSON.stringify(previousEquations));
-        } else {
+        } else
+        {
             const previousEquations = [];
             previousEquations.push(equationData);
             localStorage.setItem("previousEquations", JSON.stringify(previousEquations));
@@ -256,10 +352,12 @@ import {correctComments, incorrectComments} from "./comments.js";
 
     const getPreviousEquationCount = () => {
         const previousEquations = localStorage.getItem("previousEquations");
-        if (previousEquations) {
+        if (previousEquations)
+        {
             console.log(previousEquations);
             return JSON.parse(previousEquations).length;
-        } else {
+        } else
+        {
             const previousEquations = [];
             localStorage.setItem("previousEquations", JSON.stringify(previousEquations));
             console.log(previousEquations);
@@ -292,39 +390,46 @@ import {correctComments, incorrectComments} from "./comments.js";
         answerElement.classList.add("numbers");
     };
 
-    for (let i = 0; i < answerChoiceElements.length; i++) {
-        answerChoiceElements[i].addEventListener("click", (event) => {
+    for (let i = 0; i < answerChoiceElements.length; i++)
+    {
+        answerChoiceElements[ i ].addEventListener("click", (event) => {
             swapAndFillEquationResult(event);
             styleEquationResult();
         });
     }
 
     const disableButton = (...buttons) => {
-        for (const button of buttons) {
+        for (const button of buttons)
+        {
             const buttonText = button.innerHTML;
             button.disabled = true;
             button.setAttribute("aria-disabled", "true");
             button.classList.add("disabled");
             button.classList.remove("enabled");
-            if (buttonText.toUpperCase() === "PREV") {
+            if (buttonText.toUpperCase() === "PREV")
+            {
                 button.setAttribute("title", "There are no previous questions");
-            } else if (buttonText.toUpperCase() === "NEXT") {
+            } else if (buttonText.toUpperCase() === "NEXT")
+            {
                 button.setAttribute("title", "You must pass the equation at least once before you can proceed to the next question.");
             }
         }
     };
 
     const enableButton = (...buttons) => {
-        for (const button of buttons) {
+        for (const button of buttons)
+        {
             const buttonText = button.innerHTML;
             button.disabled = false;
             button.setAttribute("aria-disabled", "false");
             button.classList.remove("disabled");
             button.classList.add("enabled");
 
-            if (buttonText.toUpperCase() === "PREV") {
+            if (buttonText.toUpperCase() === "PREV")
+            {
                 button.setAttribute("title", "Go to the previous question.");
-            } else if (buttonText.toUpperCase() === "NEXT") {
+            } else if (buttonText.toUpperCase() === "NEXT")
+            {
                 button.setAttribute("title", "Go to the next question.");
             }
         }
@@ -341,28 +446,31 @@ import {correctComments, incorrectComments} from "./comments.js";
     comment.style.display = "none";
     const styleAnswer = (state) => {
         comment.style.display = "block";
-        if (state === 0) {
+        if (state === 0)
+        {
             answerElement.classList.remove("correct-answer");
             answerElement.classList.remove("incorrect-answer");
             answerElement.classList.add("numbers");
-        } else if (state === 1) {
+        } else if (state === 1)
+        {
             answerElement.classList.remove("incorrect-answer");
             comment.classList.remove("incorrect-comment");
             answerElement.classList.add("correct-answer");
             comment.classList.add("positive-comment");
-            comment.innerHTML = correctComments[Math.floor(Math.random() * correctComments.length)];
-        } else if (state === 2) {
+            comment.innerHTML = correctComments[ Math.floor(Math.random() * correctComments.length) ];
+        } else if (state === 2)
+        {
             answerElement.classList.remove("correct-answer");
             comment.classList.remove("positive-comment");
             answerElement.classList.add("incorrect-answer");
             comment.classList.add("incorrect-comment");
-            comment.innerHTML = incorrectComments[Math.floor(Math.random() * incorrectComments.length)];
+            comment.innerHTML = incorrectComments[ Math.floor(Math.random() * incorrectComments.length) ];
         }
 
         // hide the comment after 1 second and make sure the event is only triggered once
         setTimeout(() => {
-                comment.style.display = "none";
-            }
+            comment.style.display = "none";
+        }
             , 2000);
     };
 
@@ -414,6 +522,12 @@ import {correctComments, incorrectComments} from "./comments.js";
     // });
 
     const triggerNextButton = () => {
+        // TESTING
+        const addition = '+';
+        const subtraction = '-';
+        const multiplication = '*';
+        const division = '/';
+        const arithmeticOperations = [addition, subtraction, multiplication, division];
         saveEquation(getRandomArithmeticEquation(arithmeticOperations));
         clearAndResetAnswerElement();
         displayEquation();
@@ -426,7 +540,8 @@ import {correctComments, incorrectComments} from "./comments.js";
             const equationData = JSON.parse(localStorage.getItem("equationData"));
             const userAnswer = parseInt(document.getElementById("equation-result").innerHTML);
             const equationResult = equationData.result;
-            if (userAnswer === equationResult) {
+            if (userAnswer === equationResult)
+            {
                 styleAnswer(1);
                 equationData.isCorrect = true;
                 // enableButton(nextButton);
@@ -436,7 +551,8 @@ import {correctComments, incorrectComments} from "./comments.js";
                     triggerNextButton();
                 }, 2500);
 
-            } else {
+            } else
+            {
                 styleAnswer(2);
             }
         });
@@ -456,13 +572,31 @@ import {correctComments, incorrectComments} from "./comments.js";
 
     const equationNumberElement = document.getElementById("equation-number");
 
+
+
+
+    // Switch the user theme to selected theme
+    switchTheme();
+
+
     // Populate the page with the generated equation on window.onload
     window.onload = () => {
+        // load the user selected theme from the local storage
+        reloadTheme();
         displayCopyrightYear();
+        //setUserArithmeticOperatorsChoice();
+
+        // TESTING
+        const addition = '+';
+        const subtraction = '-';
+        const multiplication = '*';
+        const division = '/';
+        const arithmeticOperations = [addition, subtraction, multiplication, division];
         saveEquation(getRandomArithmeticEquation(arithmeticOperations));
         displayEquation();
-        disableButton(previousButton, nextButton);
-        nextButton.style.display = "none";
-        previousButton.style.display = "none";
+        //disableButton(previousButton, nextButton);
+        //nextButton.style.display = "none";
+        //previousButton.style.display = "none";
+
     };
 }());
