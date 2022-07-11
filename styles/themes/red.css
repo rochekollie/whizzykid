@@ -1,0 +1,39 @@
+:root {
+    --theme-color: var(--red);
+}
+
+a,
+a:visited {
+    color: var(--theme-color);
+}
+
+#interface {
+    background: var(--theme-color);
+}
+
+#check-button {
+    color: var(--theme-color);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#check-button:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.correct-answer {
+    color: darkgreen;
+    background-color: lightgreen;
+}
+
+.incorrect-answer {
+    color: darkred;
+    background-color: #ea7a87;
+}
+
+.positive-comment {
+    color: lightgreen;
+}
+
+.incorrect-comment {
+    color: #de033e;
+}

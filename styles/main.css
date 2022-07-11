@@ -1,14 +1,22 @@
 :root {
 
     /* Themes */
-    --seagreen-theme: #007566;
-    --robynpink-theme: #F24EAA;
-    --rebeccapurple-theme: #663399;
-    --desertland-theme: #D96941;
-    --rubyred-theme: #E84A54;
-    --skyblue-theme: #00A2FF;
-    --solarized-theme: #B58900;
-    --sandybeach-theme: #D8B08C;
+    --seagreen: #007566;
+    --robynpink: #F24EAA;
+    --rebeccapurple: #663399;
+    --desertland: #D96941;
+    --rubyred: #E84A54;
+    --skyblue: #00A2FF;
+    --solarized: #B58900;
+    --sandybeach: #D8B08C;
+    --orangevine: #F28705;
+    --palegreen: #ADD96C;
+    --paleblue: #6699CC;
+    --paleyellow: #F0E442;
+    --greystone: #8C8C8C;
+    --nighttime: #0F0F0F;
+    --nighttime-dark: #1F1F1F;
+    --daylight: #FFFFFF;
 }
 
 * {
@@ -344,6 +352,6 @@ a:active {
 }
 
 #interface {
-    background: var(--desertland-theme);
+    background: var(--desertland);
 }
 
